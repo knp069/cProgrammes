@@ -1,4 +1,3 @@
-#define max(x,y) x>=y?x:y
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,6 +6,9 @@ typedef struct node_tag{
     struct node_tag *left,*right;
 }node;
 
+int max(int x , int y){
+	return x>y?x:y;
+}
 
 node* newNode(int data){
     node* newnode = (node*)malloc(sizeof(node));
@@ -15,7 +17,7 @@ node* newNode(int data){
     return newnode;
 }
 
-int largestSumPath(node* root , int &sum){
+int largestSumPath(node* root , int *sum){
 
 
     if(root == NULL)
@@ -29,11 +31,11 @@ int largestSumPath(node* root , int &sum){
 
     int currentSum = leftsum+rightsum+root->data;
 
-    if (sum<currentSum)
-        sum = currentSum;
+    if (*sum<currentSum)
+        *sum = currentSum;
 
-    if(!leftsum || !rightsum)
-        return (!leftsum) ? rightsum + root->data : leftsum + root->data;
+    if(leftsum==0 || rightsum==0)
+        return (leftsum==0)? rightsum + root->data : leftsum + root->data;
     else
         return max(leftsum,rightsum) + root->data ;
 
@@ -55,6 +57,6 @@ int main()
     root->right->right->right->left= newNode(4);
     root->right->right->right->right= newNode(-1);
     root->right->right->right->right->left= newNode(10);
-    printf("Max pathSum of the given binary tree is %d \n",largestSumPath(root,maxSumPath));
+    printf("Max pathSum of the given binary tree is %d \n",largestSumPath(root,&maxSumPath));
     return 0;
 }
