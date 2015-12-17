@@ -29,16 +29,34 @@ void print(node* head){
 	return;
 }
 
-int delete(node** head){
-	node* ptr = *head;
+int reverseLinkedList(node** head){
 
-	if (head == null)
+    if ((*head) == null)
         return 0;
 
-    free(*head);
-    *head = ptr->next;
+    if ((*head)->next == null)
+        return 1;
+
+    node *prev,*curr,*next;
+
+    prev = null;
+    curr = *head;
+    next = (*head)->next;
+
+    while(next!=null){
+        curr->next = prev;
+
+        prev = curr;
+        curr = next;
+        next = next->next;
+
+    }
+    curr->next = prev;
+    *head = curr;
     return 1;
+
 }
+
 int main(){
 
 	node* head = newNode(5);
@@ -48,7 +66,7 @@ int main(){
 	head->next->next->next->next = newNode(2);
 	printf("list before deleting \n");
 	print(head);
-	delete(&ersalhead);
+	reverseLinkedList(&head);
 	printf("list after deleting\n");
 	print(head);
 	return 0;
