@@ -49,6 +49,12 @@ int enqueue(queue* qu , int data){
     if (temp == null)
         return 0;
 
+	if (isEmpty(qu)){
+		temp->next = qu->rear;
+		qu->rear = qu->front = temp;
+		return 1;
+	}
+
     temp->next = qu->rear;
     qu->rear = temp;
     return 1;
@@ -57,25 +63,29 @@ int enqueue(queue* qu , int data){
 int dequeue(queue* qu){
 	node* ptr = qu->rear;;
     node* prev = null;
+	int retval;
 
 	if (isEmpty(qu))
         return -9999;
 
-    if (ptr->next == null){
-        free(ptr->next);
-        ptr->next = null;
-		qu->front = ptr;
-    	return 1;
-    }
+	prev = null;
+
+	if( qu->front == qu->rear){
+		retval = qu->front->data;
+		free(qu->front);
+		qu->front = qu->rear = null;
+		return retval;
+	}
 
 	while(ptr->next != null){
         prev = ptr;
 		ptr = ptr->next;
 	}
+	retval = ptr->data;
     free(ptr);
 	qu->front = prev;
     prev->next = NULL;
-    return 1;
+    return retval;
 }
 
 int main(){
@@ -83,7 +93,9 @@ int main(){
     initialise(&qu);
     printf("%d\n",isEmpty(qu));
     printf("%d\n",dequeue(qu));
-    printf("%d\n",enqueue(qu,1));
+    printf("%d\n",enqueue(qu,5));
+	printf("%d\n",dequeue(qu));
+    printf("%d\n",enqueue(qu,5));
     printf("%d\n",enqueue(qu,2));
     printf("%d\n",enqueue(qu,3));
     printf("%d\n",enqueue(qu,4));
