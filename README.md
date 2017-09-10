@@ -62,5 +62,6 @@ list of programmes :-
   - bubble sort
   - count sort
   - insertion sort
+  - merge sort
   
 if you want some code to be included .feel free to drop a mail at knp069@gmail.com
