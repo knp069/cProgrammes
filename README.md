@@ -18,6 +18,7 @@ list of programmes :-
 - Factorial of a number
 - Fibonnaci Number
 - Prime Number
+- Binary Search
 3. Linkked List
   - adding node to the end of the linked list
   - adding node to the start of a linked list
