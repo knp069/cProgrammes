@@ -1,6 +1,6 @@
 *.[oa]
 *.out
-/cmake-build-debug
+./cmake-build-debug
 CMakeLists.txt
 *.exe
 .idea/
